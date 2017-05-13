@@ -3,22 +3,41 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 Item {
-    property alias button1: button1
-    property alias num: num
 
-    RowLayout {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 20
-        anchors.top: parent.top
+    ColumnLayout {
+        x: 20
+        y: 8
+        width: 401
+        height: 170
 
-        TextField {
-            id: num
-            placeholderText: qsTr("Text Field")
-        }
+        RowLayout {
 
-        Button {
-            id: button1
-            text: qsTr("Press Me")
+            ComboBox {
+                id: comboBox
+                textRole: 'text'
+                model: ListModel {
+                    id: model
+                    ListElement {
+                        text: "Banana"
+                        color: "Yellow"
+                    }
+                    ListElement {
+                        text: "Apple"
+                        color: "Green"
+                    }
+                    ListElement {
+                        text: "Coconut"
+                        color: "Brown"
+                    }
+                }
+            }
+
+            Label {
+                id: label
+                x: 117
+                y: 12
+                text: qsTr("Формат книги")
+            }
         }
     }
 }
