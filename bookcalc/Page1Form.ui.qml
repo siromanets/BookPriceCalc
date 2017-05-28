@@ -14,20 +14,21 @@ Item {
 
             ComboBox {
                 id: comboBox
+                objectName: "combo"
                 textRole: 'text'
                 model: ListModel {
                     id: model
                     ListElement {
                         text: "Banana"
-                        color: "Yellow"
+                        //color: "Yellow"
                     }
                     ListElement {
                         text: "Apple"
-                        color: "Green"
+                        //color: "Green"
                     }
                     ListElement {
                         text: "Coconut"
-                        color: "Brown"
+                        //color: "Brown"
                     }
                 }
             }
