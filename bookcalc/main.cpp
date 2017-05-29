@@ -8,6 +8,8 @@
 #include <QQuickItem>
 #include <QList>
 
+#include "pricecalculator.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -15,12 +17,18 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+
+
+
+    PriceCalculator* priceCalc = new PriceCalculator(&engine);
+
+
     QList<QObject*> lst = engine.rootObjects();
     int count = lst.count();
-    qDebug() << count; //Убеждаемся, что кол-во объектов один!
-    if (count == 0) return -1; //Ошибка, выходим из приложения
+    qDebug() << count;
+    if (count == 0) return -1;
 
-    QObject *object = lst[0];
+//    QObject *object = lst[0];
 
     // Using QQmlComponent
 /********************************************************************************/
@@ -39,7 +47,7 @@ int main(int argc, char *argv[])
 //    view.show();
 //    QQuickItem* object = view.rootObject();
 
-    object->setProperty("width", 1000);
+//    object->setProperty("width", 1000);
 //    QObject* obj = object->findChild<QObject*>("combo");
 //    if (obj)
 //        obj->property("text");
