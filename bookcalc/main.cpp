@@ -7,6 +7,7 @@
 #include <QQuickView>
 #include <QQuickItem>
 #include <QList>
+#include <QQmlContext>
 
 #include "pricecalculator.h"
 
@@ -21,6 +22,7 @@ int main(int argc, char *argv[])
 
 
     PriceCalculator* priceCalc = new PriceCalculator(&engine);
+    engine.rootContext()->setContextProperty("PrieceCalculator", priceCalc);
 
 
     QList<QObject*> lst = engine.rootObjects();

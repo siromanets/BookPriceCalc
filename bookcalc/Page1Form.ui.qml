@@ -3,6 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 Item {
+    property alias btnCalc: btnCalc
 
     ColumnLayout {
         x: 20
@@ -40,5 +41,12 @@ Item {
                 text: qsTr("Формат книги")
             }
         }
+    }
+
+    Button {
+        id: btnCalc
+        x: 270
+        y: 374
+        text: qsTr("Вирахувати")
     }
 }

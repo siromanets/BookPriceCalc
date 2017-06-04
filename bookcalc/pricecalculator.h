@@ -1,6 +1,7 @@
 #ifndef PRICECALCULATOR_H
 #define PRICECALCULATOR_H
 #include <QObject>
+#include <QString>
 #include <QQmlApplicationEngine>
 
 class PriceCalculator : public QObject
@@ -13,6 +14,7 @@ public:
 signals:
 
 public slots:
+    void onButtonClicked(const QString& iString);
 
 private:
     QQmlApplicationEngine* mEngine;
