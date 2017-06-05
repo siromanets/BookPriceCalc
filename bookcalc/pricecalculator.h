@@ -14,7 +14,7 @@ public:
 signals:
 
 public slots:
-    void onButtonClicked(const QString& iString);
+    void onButtonClicked();
 
 private:
     QQmlApplicationEngine* mEngine;

@@ -22,15 +22,8 @@ int main(int argc, char *argv[])
 
 
     PriceCalculator* priceCalc = new PriceCalculator(&engine);
-    engine.rootContext()->setContextProperty("PrieceCalculator", priceCalc);
+    engine.rootContext()->setContextProperty("priceCalc", priceCalc);
 
-
-    QList<QObject*> lst = engine.rootObjects();
-    int count = lst.count();
-    qDebug() << count;
-    if (count == 0) return -1;
-
-//    QObject *object = lst[0];
 
     // Using QQmlComponent
 /********************************************************************************/

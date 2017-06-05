@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.0
 
 Item {
     property alias btnCalc: btnCalc
+    property alias combo: comboBox
 
     ColumnLayout {
         x: 20
