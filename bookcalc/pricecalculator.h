@@ -14,7 +14,7 @@ public:
 signals:
 
 public slots:
-    void onButtonClicked();
+    void onButtonClicked(const QString& iBookFormat);
 
 private:
     QQmlApplicationEngine* mEngine;

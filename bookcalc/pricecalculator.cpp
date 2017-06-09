@@ -7,7 +7,7 @@ PriceCalculator::PriceCalculator(QObject *parent) : QObject(parent){}
 
 PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) : mEngine(iEngine){}
 
-void PriceCalculator::onButtonClicked()
+void PriceCalculator::onButtonClicked(const QString &iBookFormat)
 {
     QList<QObject*> lst = mEngine->rootObjects();
     int count = lst.count();
@@ -16,6 +16,8 @@ void PriceCalculator::onButtonClicked()
 
     QObject* object = lst[0];
     QObject* combo = object->findChild<QObject*>("combo");
-    qDebug() << "obj info " << combo->objectName();
+//    qDebug() << "obj info " << combo->objectName();
+    QString str = QString::number(iBookFormat.toInt() + 100);
+    qDebug() << "some price: " <<  str;
     qDebug() << "on button action method call \n";
 }
