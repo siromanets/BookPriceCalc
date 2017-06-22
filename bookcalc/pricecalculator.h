@@ -4,6 +4,8 @@
 #include <QString>
 #include <QQmlApplicationEngine>
 
+#include <provideandsyncprices.h>
+
 class PriceCalculator : public QObject
 {
     Q_OBJECT
@@ -18,6 +20,7 @@ public slots:
 
 private:
     QQmlApplicationEngine* mEngine;
+    ProvideAndSyncPrices* mProvierAndSyncer;
 };
 
 #endif // PRICECALCULATOR_H

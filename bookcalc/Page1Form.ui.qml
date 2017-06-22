@@ -6,7 +6,6 @@ import Qt.labs.settings 1.0
 Item {
     id: fasteringLabel
     property alias btnCalc: btnCalc
-    property alias combo: bookFormatCB
     property alias cbEnableEditing: cbEnableEditing
     property alias formatPrice: model
     property alias bookFormatCB: bookFormatCB

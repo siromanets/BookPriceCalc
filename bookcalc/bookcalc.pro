@@ -1,9 +1,11 @@
 QT += qml quick
+QT += widgets
 
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    pricecalculator.cpp
+    pricecalculator.cpp \
+    provideandsyncprices.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,4 +18,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    pricecalculator.h
+    pricecalculator.h \
+    provideandsyncprices.h
