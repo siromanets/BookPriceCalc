@@ -7,7 +7,14 @@ PriceCalculator::PriceCalculator(QObject *parent) : QObject(parent){
     mProvierAndSyncer = new ProvideAndSyncPrices();
 }
 
-PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) : mEngine(iEngine){}
+PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) :
+    mEngine(iEngine),
+    mProvierAndSyncer(new ProvideAndSyncPrices()){}
+
+PriceCalculator::~PriceCalculator()
+{
+    delete mProvierAndSyncer;
+}
 
 void PriceCalculator::onButtonClicked(const QString &iBookFormat)
 {

@@ -12,6 +12,7 @@ class PriceCalculator : public QObject
 public:
     explicit PriceCalculator(QObject *parent = 0);
     PriceCalculator(QQmlApplicationEngine* iEngine);
+    ~PriceCalculator();
 
 signals:
 

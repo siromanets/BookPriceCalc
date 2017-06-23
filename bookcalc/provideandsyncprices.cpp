@@ -6,14 +6,14 @@
 
 #include "provideandsyncprices.h"
 
-ProvideAndSyncPrices::ProvideAndSyncPrices()
+ProvideAndSyncPrices::ProvideAndSyncPrices():mXmlWriter()
 {
     mXmlWriter.setAutoFormatting(true);
 }
 
 void ProvideAndSyncPrices::SavePrices()
 {
-    qDebug() << QFileInfo("prices.xml").exists();
+//    qDebug() << QFileInfo("prices.xml").exists();
 
     QFile* file = new QFile(QCoreApplication::applicationDirPath() + "/prices.xml");
 
@@ -26,14 +26,19 @@ void ProvideAndSyncPrices::SavePrices()
         return;
     }
 
+//    QXmlStreamWriter xml;
+//    xml.setDevice(file);
+
+
     mXmlWriter.setDevice(file);
     mXmlWriter.writeStartDocument();
-    mXmlWriter.writeDTD("<!DOCTYPE xbel>");
-    mXmlWriter.writeStartElement("xbel");
+    mXmlWriter.writeDTD("<!DOCTYPE BookPrice>");
+    mXmlWriter.writeStartElement("ElementPrices");
     mXmlWriter.writeAttribute("version", "1.0");
 
 
     mXmlWriter.writeEndDocument();
+    file->close();
 }
 
 //bool ProvideAndSyncPrices::writeFile()
