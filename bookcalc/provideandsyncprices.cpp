@@ -13,7 +13,6 @@ ProvideAndSyncPrices::ProvideAndSyncPrices():mXmlWriter()
 
 void ProvideAndSyncPrices::SavePrices()
 {
-//    qDebug() << QFileInfo("prices.xml").exists();
 
     QFile* file = new QFile(QCoreApplication::applicationDirPath() + "/prices.xml");
 
@@ -26,32 +25,37 @@ void ProvideAndSyncPrices::SavePrices()
         return;
     }
 
-//    QXmlStreamWriter xml;
-//    xml.setDevice(file);
-
-
     mXmlWriter.setDevice(file);
     mXmlWriter.writeStartDocument();
-    mXmlWriter.writeDTD("<!DOCTYPE BookPrice>");
+    mXmlWriter.writeDTD("====================<!DOCTYPE BookPrice>====================");
     mXmlWriter.writeStartElement("ElementPrices");
     mXmlWriter.writeAttribute("version", "1.0");
 
+    mXmlWriter.writeStartElement("Формат Книги");
+    mXmlWriter.writeTextElement("A4", "1.5");
+    mXmlWriter.writeTextElement("A5", "1.0");
+    mXmlWriter.writeTextElement("A6", "0.8");
+    mXmlWriter.writeTextElement("Кишенькова", "1.2");
+    mXmlWriter.writeEndElement();
 
+    mXmlWriter.writeStartElement("Обкладинка");
+    mXmlWriter.writeTextElement("Тверда", "5");
+    mXmlWriter.writeTextElement("М'яка", "3");
+    mXmlWriter.writeEndElement();
+
+    mXmlWriter.writeStartElement("Скріплення");
+    mXmlWriter.writeTextElement("Сковаба", "3");
+    mXmlWriter.writeTextElement("Термобіндер", "3");
+    mXmlWriter.writeTextElement("Твердий переплет", "3");
+    mXmlWriter.writeTextElement("Пружинка", "3");
+    mXmlWriter.writeEndElement();
+
+//    mXmlWriter.writeEndElement();
     mXmlWriter.writeEndDocument();
     file->close();
 }
 
-//bool ProvideAndSyncPrices::writeFile()
-//{
-//    xml.setDevice(device);
-
-//    xml.writeStartDocument();
-//    xml.writeDTD("<!DOCTYPE xbel>");
-//    xml.writeStartElement("xbel");
-//    xml.writeAttribute("version", "1.0");
 //    for (int i = 0; i < treeWidget->topLevelItemCount(); ++i)
 //        writeItem(treeWidget->topLevelItem(i));
 
-//    xml.writeEndDocument();
-//    return true;
-//}
+
