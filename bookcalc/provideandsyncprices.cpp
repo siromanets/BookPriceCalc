@@ -6,7 +6,7 @@
 
 #include "provideandsyncprices.h"
 
-ProvideAndSyncPrices::ProvideAndSyncPrices():mXmlWriter()
+ProvideAndSyncPrices::ProvideAndSyncPrices():mXmlWriter(), mXmlReader()
 {
     mXmlWriter.setAutoFormatting(true);
 }
@@ -40,7 +40,7 @@ void ProvideAndSyncPrices::SavePrices()
 
     mXmlWriter.writeStartElement("Обкладинка");
     mXmlWriter.writeTextElement("Тверда", "5");
-    mXmlWriter.writeTextElement("М'яка", "3");
+    mXmlWriter.writeTextElement("М\'яка", "3");
     mXmlWriter.writeEndElement();
 
     mXmlWriter.writeStartElement("Скріплення");
@@ -55,7 +55,25 @@ void ProvideAndSyncPrices::SavePrices()
     file->close();
 }
 
-//    for (int i = 0; i < treeWidget->topLevelItemCount(); ++i)
-//        writeItem(treeWidget->topLevelItem(i));
+void ProvideAndSyncPrices::GetPrices()
+{
+    QFile* file = new QFile(QCoreApplication::applicationDirPath() + "/prices.xml");
 
-
+    if ( !file->open(QIODevice::ReadOnly) )
+    {
+        QMessageBox::warning(NULL, QObject::tr("Price saving:"),
+                             QObject::tr("Cannot write file %1:\n%2.")
+                             .arg(QString("prices.xml"))
+                             .arg(file->errorString()));
+        return;
+    }
+    mXmlReader.setDevice(file);
+//////////////////////////////////////////////////
+    qDebug() << mXmlReader.isStartElement();
+    qDebug() << mXmlReader.errorString();
+//////////////////////////////////////////////////
+    while (mXmlReader.readNextStartElement())
+    {
+        qDebug() << mXmlReader.name() << "\n";
+    }
+}

@@ -19,6 +19,7 @@ PriceCalculator::~PriceCalculator()
 void PriceCalculator::onButtonClicked(const QString &iBookFormat)
 {
     mProvierAndSyncer->SavePrices();
+    mProvierAndSyncer->GetPrices();
     //temporary comented out for testing
 //    QList<QObject*> lst = mEngine->rootObjects();
 //    int count = lst.count();
