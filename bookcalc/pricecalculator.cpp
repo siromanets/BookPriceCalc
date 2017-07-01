@@ -9,7 +9,10 @@ PriceCalculator::PriceCalculator(QObject *parent) : QObject(parent){
 
 PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) :
     mEngine(iEngine),
-    mProvierAndSyncer(new ProvideAndSyncPrices()){}
+    mProvierAndSyncer(new ProvideAndSyncPrices())
+{
+    mProvierAndSyncer->ReceivePrices();
+}
 
 PriceCalculator::~PriceCalculator()
 {
@@ -19,7 +22,7 @@ PriceCalculator::~PriceCalculator()
 void PriceCalculator::onButtonClicked(const QString &iBookFormat)
 {
     mProvierAndSyncer->SavePrices();
-    mProvierAndSyncer->ReceivePrices();
+
     //temporary comented out for testing
 //    QList<QObject*> lst = mEngine->rootObjects();
 //    int count = lst.count();

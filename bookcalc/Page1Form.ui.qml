@@ -28,14 +28,15 @@ Item {
     GridLayout {
         id: gridLayout1
         //        cellWidth: 250; cellHeight: 80
-        x: 21
-        y: 40
-        width: 400
-        height: 200
+        x: 33
+        y: 67
+        width: 523
+        height: 252
+        clip: false
         columnSpacing: 10
         rowSpacing: 5
         rows: 5
-        columns: 2
+        columns: 3
 
         ComboBox {
             id: bookFormatCB
@@ -50,6 +51,15 @@ Item {
                 ListElement { text: "А6"; price: "3" }
                 ListElement { text: "Кишенькова"; price: "2" }
             }
+        }
+
+        TextField {
+            id: bookFormatPrices
+            width: 50
+            text: qsTr("Text Field")
+            Layout.preferredWidth: 50
+            enabled: false
+            transformOrigin: Item.Center
         }
 
         Label {
@@ -76,6 +86,14 @@ Item {
         }
 
 
+        TextField {
+            id: coverPrices
+            width: 50
+            text: qsTr("Text Field")
+            enabled: false
+            Layout.preferredWidth: 50
+        }
+
         Label {
             id: coverLabel
             text: qsTr("Обкладинка")
@@ -91,6 +109,11 @@ Item {
         }
 
 
+
+        Label {
+            id: label
+            text: qsTr("Label")
+        }
 
         Label {
             id: nubmerOfPagesLabel
@@ -111,6 +134,15 @@ Item {
             }
         }
 
+        TextField {
+            id: fasteringPrices
+            width: 50
+            text: qsTr("Text Field")
+            visible: true
+            enabled: false
+            Layout.preferredWidth: 50
+        }
+
         Label {
             id: fasteningLabel
             text: qsTr("Скріплення")
@@ -128,9 +160,21 @@ Item {
             }
         }
 
+        TextField {
+            id: printTypePrices
+            width: 50
+            text: qsTr("Text Field")
+            enabled: false
+            Layout.preferredWidth: 50
+        }
         Label {
             id: printTypeLabel
             text: qsTr("Тип друку")
         }
+
+
+
+
+
     }
 }
