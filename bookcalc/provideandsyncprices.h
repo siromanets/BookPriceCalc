@@ -8,9 +8,18 @@
 class ProvideAndSyncPrices
 {
 public:
+    enum EBookPrices
+    {
+        eFormat,
+        eCover,
+        eFastering
+    };
+
+public:
     ProvideAndSyncPrices();
     void SavePrices();
     void ReceivePrices();
+    std::map<QString, double>& GetBookPrices(EBookPrices iKey);
 
 private:
     struct BookPrices
@@ -21,9 +30,9 @@ private:
     };
 
 private:
-    QXmlStreamWriter mXmlWriter;
-    QXmlStreamReader mXmlReader;
-    BookPrices bookPrices;
+    QXmlStreamWriter    mXmlWriter;
+    QXmlStreamReader    mXmlReader;
+    BookPrices          mBookPrices;
 };
 
 #endif // PROVIDEANDSYNCPRICES_H

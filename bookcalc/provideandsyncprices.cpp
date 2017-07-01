@@ -81,7 +81,7 @@ void ProvideAndSyncPrices::ReceivePrices()
                 {
                     std::pair<QString, double> p(mXmlReader.name().toString(),
                                                  mXmlReader.readElementText().toDouble());
-                    bookPrices.format.insert(p);
+                    mBookPrices.format.insert(p);
                 }
             } else if (mXmlReader.name() == "Обкладинка")
             {
@@ -89,7 +89,7 @@ void ProvideAndSyncPrices::ReceivePrices()
                 {
                     std::pair<QString, double> p(mXmlReader.name().toString(),
                                                  mXmlReader.readElementText().toDouble());
-                    bookPrices.cover.insert(p);
+                    mBookPrices.cover.insert(p);
                 }
             }
 
@@ -99,10 +99,24 @@ void ProvideAndSyncPrices::ReceivePrices()
                 {
                     std::pair<QString, double> p(mXmlReader.name().toString(),
                                                  mXmlReader.readElementText().toDouble());
-                    bookPrices.fastening.insert(p);
+                    mBookPrices.fastening.insert(p);
                 }
             }
         }
     }
     qDebug() << mXmlReader.errorString();
+}
+
+std::map<QString, double> &ProvideAndSyncPrices::GetBookPrices(ProvideAndSyncPrices::EBookPrices iKey)
+{
+    switch (iKey) {
+    case eFormat:
+        return mBookPrices.format; break;
+    case eCover:
+        return mBookPrices.cover; break;
+    case eFastering:
+        return mBookPrices.fastening; break;
+    default:
+        break;
+    }
 }

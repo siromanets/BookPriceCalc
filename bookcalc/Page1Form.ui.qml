@@ -10,6 +10,10 @@ Item {
     property alias formatPrice: model
     property alias bookFormatCB: bookFormatCB
     property alias coverCB: coverCB
+    property alias bookFormatPrices: bookFormatPrices
+    property alias coverPrices: coverPrices
+    property alias fasteringPrices: fasteringPrices
+    property alias printTypePrices: printTypePrices
 
     Button {
         id: btnCalc
@@ -56,7 +60,7 @@ Item {
         TextField {
             id: bookFormatPrices
             width: 50
-            text: qsTr("Text Field")
+            text: qsTr("0.0")
             Layout.preferredWidth: 50
             enabled: false
             transformOrigin: Item.Center
@@ -89,7 +93,7 @@ Item {
         TextField {
             id: coverPrices
             width: 50
-            text: qsTr("Text Field")
+            text: qsTr("0.0")
             enabled: false
             Layout.preferredWidth: 50
         }
@@ -112,7 +116,7 @@ Item {
 
         Label {
             id: label
-            text: qsTr("Label")
+            text: qsTr("")
         }
 
         Label {
@@ -137,7 +141,7 @@ Item {
         TextField {
             id: fasteringPrices
             width: 50
-            text: qsTr("Text Field")
+            text: qsTr("0.0")
             visible: true
             enabled: false
             Layout.preferredWidth: 50
@@ -163,7 +167,7 @@ Item {
         TextField {
             id: printTypePrices
             width: 50
-            text: qsTr("Text Field")
+            text: qsTr("0.0")
             enabled: false
             Layout.preferredWidth: 50
         }

@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QQmlApplicationEngine>
+#include <QQmlComponent>
 
 #include "pricecalculator.h"
 
@@ -12,6 +13,22 @@ PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) :
     mProvierAndSyncer(new ProvideAndSyncPrices())
 {
     mProvierAndSyncer->ReceivePrices();
+
+    QObject* test = mEngine->rootObjects().first();
+    QObject* next = test->findChild<QObject*>("bookFormatCB");
+
+    if (test)
+        qDebug() << test->objectName();
+//    QQmlComponent component(mEngine, QUrl(QStringLiteral("qrc:/main.qml")));
+
+//    if( !component.isReady() )
+//        qDebug() << "Error: " << component.errorString();
+//    QObject *object = component.create();
+////    object->setProperty("width", 500);
+//    QObject* obj = object->findChild<QObject*>("bookFormatPrices");
+//    if (obj)
+//        obj->setProperty("text", "blah");
+//    qDebug() << "obj info " << object->objectName();
 }
 
 PriceCalculator::~PriceCalculator()
