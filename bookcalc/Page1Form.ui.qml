@@ -10,10 +10,10 @@ Item {
     property alias formatPrice: model
     property alias bookFormatCB: bookFormatCB
     property alias coverCB: coverCB
-    property alias bookFormatPrices: bookFormatPrices
     property alias coverPrices: coverPrices
     property alias fasteringPrices: fasteringPrices
     property alias printTypePrices: printTypePrices
+    property alias bookFormatPrices: bookFormatPrices
 
     Button {
         id: btnCalc
@@ -46,24 +46,25 @@ Item {
             id: bookFormatCB
             Layout.fillWidth: true
             currentIndex: 0
-            objectName: "combo"
+            objectName: "bookFormatCB"
             textRole: 'text'
             model: ListModel {
                 id: model
-                ListElement { text: "А4"; price: "5" }
-                ListElement { text: "А5"; price: "4" }
-                ListElement { text: "А6"; price: "3" }
-                ListElement { text: "Кишенькова"; price: "2" }
+                objectName: "bookFormatList"
+                ListElement { text: "А4"; price: 5.0 }
+                ListElement { text: "А5"; price: 4.0 }
+                ListElement { text: "А6"; price: 3.0 }
+                ListElement { text: "Кишенькова"; price: 2.0 }
             }
         }
 
         TextField {
             id: bookFormatPrices
+            objectName: "bookFormatP"
             width: 50
             text: qsTr("0.0")
             Layout.preferredWidth: 50
             enabled: false
-            transformOrigin: Item.Center
         }
 
         Label {

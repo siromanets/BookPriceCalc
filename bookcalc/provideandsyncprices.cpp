@@ -32,9 +32,9 @@ void ProvideAndSyncPrices::SavePrices()
     mXmlWriter.writeAttribute("version", "1.0");
 
     mXmlWriter.writeStartElement("ФорматКниги");
-        mXmlWriter.writeTextElement("A4", "1.5");
-        mXmlWriter.writeTextElement("A5", "1.0");
-        mXmlWriter.writeTextElement("A6", "0.8");
+        mXmlWriter.writeTextElement("А4", "1.5");
+        mXmlWriter.writeTextElement("А5", "1.0");
+        mXmlWriter.writeTextElement("А6", "0.8");
         mXmlWriter.writeTextElement("Кишенькова", "1.2");
     mXmlWriter.writeEndElement();
 

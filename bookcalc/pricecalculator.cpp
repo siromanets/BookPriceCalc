@@ -1,6 +1,8 @@
 #include <QDebug>
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
+#include <QQuickItem>
+#include <QComboBox>
 
 #include "pricecalculator.h"
 
@@ -14,21 +16,25 @@ PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) :
 {
     mProvierAndSyncer->ReceivePrices();
 
-    QObject* test = mEngine->rootObjects().first();
-    QObject* next = test->findChild<QObject*>("bookFormatCB");
+    std::map<QString, double> formatPrice = mProvierAndSyncer->GetBookPrices(ProvideAndSyncPrices::eFormat);
 
+    QObject* test = mEngine->rootObjects().first();
+    QQuickItem* next = test->findChild<QQuickItem*>("bookFormatCB");
+
+
+    QString str = (next->property("currentText")).toString();
+    if (!str.isEmpty())
+    {
+        double currentPrice = formatPrice[str];
+        QQuickItem* priceFiels = test->findChild<QQuickItem*>("bookFormatP");
+        if (priceFiels)
+            priceFiels->setProperty("text", currentPrice);
+    }
+   // int i = (next->property("currentIndex")).toInt();
     if (test)
         qDebug() << test->objectName();
-//    QQmlComponent component(mEngine, QUrl(QStringLiteral("qrc:/main.qml")));
-
-//    if( !component.isReady() )
-//        qDebug() << "Error: " << component.errorString();
-//    QObject *object = component.create();
-////    object->setProperty("width", 500);
-//    QObject* obj = object->findChild<QObject*>("bookFormatPrices");
-//    if (obj)
-//        obj->setProperty("text", "blah");
-//    qDebug() << "obj info " << object->objectName();
+    if (next)
+        qDebug() << next->objectName() << str;
 }
 
 PriceCalculator::~PriceCalculator()
