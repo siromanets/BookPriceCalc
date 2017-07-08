@@ -10,7 +10,6 @@ Page1Form {
 }
 
     btnCalc.onClicked: {
-
         //console.debug(formatPrice.get( bookFormatCB.currentIndex ).price)
         priceCalc.onButtonClicked( formatPrice.get( bookFormatCB.currentIndex ).price )
     }

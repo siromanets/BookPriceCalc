@@ -15,26 +15,30 @@ PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) :
     mProvierAndSyncer(new ProvideAndSyncPrices())
 {
     mProvierAndSyncer->ReceivePrices();
+    QObject* rootObj = mEngine->rootObjects().first();
 
-    std::map<QString, double> formatPrice = mProvierAndSyncer->GetBookPrices(ProvideAndSyncPrices::eFormat);
+    std::map<ProvideAndSyncPrices::EBookPrices, QString> items;
+    items.emplace(ProvideAndSyncPrices::eFormat, QString("bookFormatCB"));
+    items.emplace(ProvideAndSyncPrices::eCover, QString("coverCB"));
 
-    QObject* test = mEngine->rootObjects().first();
-    QQuickItem* next = test->findChild<QQuickItem*>("bookFormatCB");
-
-
-    QString str = (next->property("currentText")).toString();
-    if (!str.isEmpty())
+    for (auto& it : items)
     {
-        double currentPrice = formatPrice[str];
-        QQuickItem* priceFiels = test->findChild<QQuickItem*>("bookFormatP");
-        if (priceFiels)
-            priceFiels->setProperty("text", currentPrice);
+        qDebug() << it.second;
+        std::map<QString, double> prices = mProvierAndSyncer->GetBookPrices(it.first);
+        QQuickItem* bookCB = rootObj->findChild<QQuickItem*>(it.second);
+
+        if (bookCB)
+        {
+            QString str = (bookCB->property("currentText")).toString();
+            if (!str.isEmpty())
+            {
+                double currentPrice = prices[str];
+                QQuickItem* priceFiels = rootObj->findChild<QQuickItem*>("bookFormatP");
+                if (priceFiels)
+                    priceFiels->setProperty("text", currentPrice);
+            }
+        }
     }
-   // int i = (next->property("currentIndex")).toInt();
-    if (test)
-        qDebug() << test->objectName();
-    if (next)
-        qDebug() << next->objectName() << str;
 }
 
 PriceCalculator::~PriceCalculator()
@@ -57,5 +61,13 @@ void PriceCalculator::onButtonClicked(const QString &iBookFormat)
 ////    qDebug() << "obj info " << combo->objectName();
 //    QString str = QString::number(iBookFormat.toInt() + 100);
 //    qDebug() << "some price: " <<  str;
-//    qDebug() << "on button action method call \n";
+    //    qDebug() << "on button action method call \n";
 }
+
+bool PriceCalculator::UpdatePrice(QQuickItem* iItem)
+{
+    return false;
+}
+
+
+

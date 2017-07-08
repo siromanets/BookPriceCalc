@@ -11,6 +11,7 @@ Item {
     property alias bookFormatCB: bookFormatCB
     property alias coverCB: coverCB
     property alias coverPrices: coverPrices
+    property alias fasteningCB: fasteningCB
     property alias fasteringPrices: fasteringPrices
     property alias printTypePrices: printTypePrices
     property alias bookFormatPrices: bookFormatPrices
@@ -74,7 +75,9 @@ Item {
 
         ComboBox {
             id: coverCB
+            objectName: "coverCB"
             width: 150
+            currentIndex: 1
             Layout.fillWidth: true
             spacing: 8
             textRole: 'text'
@@ -93,6 +96,7 @@ Item {
 
         TextField {
             id: coverPrices
+            objectName: "coverP"
             width: 50
             text: qsTr("0.0")
             enabled: false

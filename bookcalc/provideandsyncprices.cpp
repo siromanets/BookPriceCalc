@@ -39,15 +39,15 @@ void ProvideAndSyncPrices::SavePrices()
     mXmlWriter.writeEndElement();
 
     mXmlWriter.writeStartElement("Обкладинка");
-        mXmlWriter.writeTextElement("Тверда", "5");
-        mXmlWriter.writeTextElement("М_яка", "3");
+        mXmlWriter.writeTextElement("Тверда", "5.0");
+        mXmlWriter.writeTextElement("М*яка", "3.0");
     mXmlWriter.writeEndElement();
 
     mXmlWriter.writeStartElement("Скріплення");
-        mXmlWriter.writeTextElement("Сковаба", "3");
-        mXmlWriter.writeTextElement("Термобіндер", "3");
-        mXmlWriter.writeTextElement("ТвердийПереплет", "3");
-        mXmlWriter.writeTextElement("Пружинка", "3");
+        mXmlWriter.writeTextElement("Сковаба", "3.0");
+        mXmlWriter.writeTextElement("Термобіндер", "3.0");
+        mXmlWriter.writeTextElement("Твердий_Переплет", "3.0");
+        mXmlWriter.writeTextElement("Пружинка", "3.0");
     mXmlWriter.writeEndElement();
 
 //    mXmlWriter.writeEndElement();
