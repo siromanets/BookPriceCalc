@@ -2,11 +2,15 @@ import QtQuick 2.7
 import QtQuick.Controls 1.1
 
 Page1Form {
+    bookFormatP.onTextChanged: {
+//        if (bookFormatPrices.enabled && )
+        priceCalc.updatePrice(bookFormatCB.objectName);
+}
     cbEnableEditing.onCheckStateChanged: {
-        bookFormatPrices.enabled = !(bookFormatPrices.enabled)
+        bookFormatP.enabled = !(bookFormatP.enabled)
         coverPrices.enabled = !(coverPrices.enabled)
-        fasteringPrices.enabled = !(fasteringPrices.enabled)
-        printTypePrices.enabled = !(printTypePrices.enabled)
+        fasteningP.enabled = !(fasteningP.enabled)
+        printTypeP.enabled = !(printTypeP.enabled)
 }
 
     btnCalc.onClicked: {

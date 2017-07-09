@@ -17,23 +17,23 @@ PriceCalculator::PriceCalculator(QQmlApplicationEngine* iEngine) :
     mProvierAndSyncer->ReceivePrices();
     QObject* rootObj = mEngine->rootObjects().first();
 
-    std::map<ProvideAndSyncPrices::EBookPrices, QString> items;
-    items.emplace(ProvideAndSyncPrices::eFormat, QString("bookFormatCB"));
-    items.emplace(ProvideAndSyncPrices::eCover, QString("coverCB"));
+    mItemMap.emplace(ProvideAndSyncPrices::eFormat, std::make_pair<QString, QString>("bookFormatCB", "bookFormatP"));
+    mItemMap.emplace(ProvideAndSyncPrices::eCover, std::make_pair<QString, QString>("coverCB", "coverP"));
+    mItemMap.emplace(ProvideAndSyncPrices::eFastering, std::make_pair<QString, QString>("fasteningCB", "fasteningP"));
 
-    for (auto& it : items)
+    for (auto& it : mItemMap)
     {
         qDebug() << it.second;
         std::map<QString, double> prices = mProvierAndSyncer->GetBookPrices(it.first);
-        QQuickItem* bookCB = rootObj->findChild<QQuickItem*>(it.second);
+        QQuickItem* bookCB = rootObj->findChild<QQuickItem*>(it.second.first);
 
         if (bookCB)
         {
-            QString str = (bookCB->property("currentText")).toString();
+            QString str = fixName((bookCB->property("currentText")).toString());
             if (!str.isEmpty())
             {
                 double currentPrice = prices[str];
-                QQuickItem* priceFiels = rootObj->findChild<QQuickItem*>("bookFormatP");
+                QQuickItem* priceFiels = rootObj->findChild<QQuickItem*>(it.second.second);
                 if (priceFiels)
                     priceFiels->setProperty("text", currentPrice);
             }
@@ -46,9 +46,14 @@ PriceCalculator::~PriceCalculator()
     delete mProvierAndSyncer;
 }
 
-void PriceCalculator::onButtonClicked(const QString &iBookFormat)
+void PriceCalculator::savePrices()
 {
     mProvierAndSyncer->SavePrices();
+}
+
+void PriceCalculator::onButtonClicked(const QString &iBookFormat)
+{
+
 
     //temporary comented out for testing
 //    QList<QObject*> lst = mEngine->rootObjects();
@@ -61,13 +66,46 @@ void PriceCalculator::onButtonClicked(const QString &iBookFormat)
 ////    qDebug() << "obj info " << combo->objectName();
 //    QString str = QString::number(iBookFormat.toInt() + 100);
 //    qDebug() << "some price: " <<  str;
-    //    qDebug() << "on button action method call \n";
+    //    qDebug() << "on button action method call \";
 }
 
-bool PriceCalculator::UpdatePrice(QQuickItem* iItem)
+void PriceCalculator::updatePrice(const QString &iObjName)
 {
-    return false;
+    ProvideAndSyncPrices::EBookPrices key;
+    QString priceField;
+    for(auto& it : mItemMap)
+    {
+        if (!iObjName.compare(it.second.first))
+        {
+            key = it.first;
+            priceField = it.second.second;
+            break;
+        }
+    }
+
+
+    QObject* rootObj = mEngine->rootObjects().first();
+
+    std::map<QString, double> prices = mProvierAndSyncer->GetBookPrices(key);
+    QQuickItem* bookCB = rootObj->findChild<QQuickItem*>(iObjName);
+
+    if (bookCB)
+    {
+        QString str = fixName((bookCB->property("currentText")).toString());
+        if (!str.isEmpty())
+        {
+
+            QQuickItem* priceF = rootObj->findChild<QQuickItem*>(priceField);
+            if (priceF)
+            {
+                prices[str] = priceF->property("text").toDouble();
+            }
+        }
+    }
 }
 
-
-
+QString PriceCalculator::fixName(QString iName)
+{
+    QString str = iName.replace("'",".");
+    return str.replace(" ","_");
+}

@@ -15,18 +15,23 @@ public:
     PriceCalculator(QQmlApplicationEngine* iEngine);
     ~PriceCalculator();
 
+
+    void savePrices();
+
 signals:
 
 public slots:
     void onButtonClicked(const QString& iBookFormat);
+    void updatePrice(const QString& iObjName);
 
 private:
-    bool UpdatePrice(QQuickItem *iItem);
+
+    QString fixName(QString iName);
 
 private:
     QQmlApplicationEngine* mEngine;
     ProvideAndSyncPrices* mProvierAndSyncer;
-    std::map<ProvideAndSyncPrices::EBookPrices, QString> mItemMap;
+    std::map<ProvideAndSyncPrices::EBookPrices, std::pair<QString, QString> > mItemMap;
 };
 
 #endif // PRICECALCULATOR_H

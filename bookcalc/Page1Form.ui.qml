@@ -9,12 +9,12 @@ Item {
     property alias cbEnableEditing: cbEnableEditing
     property alias formatPrice: model
     property alias bookFormatCB: bookFormatCB
+    property alias bookFormatP : bookFormatP
     property alias coverCB: coverCB
-    property alias coverPrices: coverPrices
+    property alias coverPrices: coverP
     property alias fasteningCB: fasteningCB
-    property alias fasteringPrices: fasteringPrices
-    property alias printTypePrices: printTypePrices
-    property alias bookFormatPrices: bookFormatPrices
+    property alias fasteningP: fasteningP
+    property alias printTypeP: printTypeP
 
     Button {
         id: btnCalc
@@ -60,7 +60,7 @@ Item {
         }
 
         TextField {
-            id: bookFormatPrices
+            id: bookFormatP
             objectName: "bookFormatP"
             width: 50
             text: qsTr("0.0")
@@ -95,7 +95,7 @@ Item {
 
 
         TextField {
-            id: coverPrices
+            id: coverP
             objectName: "coverP"
             width: 50
             text: qsTr("0.0")
@@ -131,6 +131,7 @@ Item {
 
         ComboBox {
             id: fasteningCB
+            objectName: "fasteningCB"
             width: 250
             Layout.fillWidth: true
             textRole: 'text'
@@ -144,7 +145,8 @@ Item {
         }
 
         TextField {
-            id: fasteringPrices
+            id: fasteningP
+            objectName: "fasteningP"
             width: 50
             text: qsTr("0.0")
             visible: true
@@ -170,7 +172,7 @@ Item {
         }
 
         TextField {
-            id: printTypePrices
+            id: printTypeP
             width: 50
             text: qsTr("0.0")
             enabled: false

@@ -32,19 +32,23 @@ void ProvideAndSyncPrices::SavePrices()
     mXmlWriter.writeAttribute("version", "1.0");
 
     mXmlWriter.writeStartElement("ФорматКниги");
-        mXmlWriter.writeTextElement("А4", "1.5");
-        mXmlWriter.writeTextElement("А5", "1.0");
-        mXmlWriter.writeTextElement("А6", "0.8");
-        mXmlWriter.writeTextElement("Кишенькова", "1.2");
+    for (auto& it : mBookPrices.format)
+        mXmlWriter.writeTextElement(it.first, QString::number(it.second));
+//        mXmlWriter.writeTextElement("А4", "1.5");
+//        mXmlWriter.writeTextElement("А5", "1.0");
+//        mXmlWriter.writeTextElement("А6", "0.8");
+//        mXmlWriter.writeTextElement("Кишенькова", "1.2");
     mXmlWriter.writeEndElement();
 
     mXmlWriter.writeStartElement("Обкладинка");
-        mXmlWriter.writeTextElement("Тверда", "5.0");
-        mXmlWriter.writeTextElement("М*яка", "3.0");
+    for (auto& it : mBookPrices.cover)
+        mXmlWriter.writeTextElement(it.first, QString::number(it.second));
+//        mXmlWriter.writeTextElement("Тверда", "5.0");
+//        mXmlWriter.writeTextElement("М.яка", "3.0");
     mXmlWriter.writeEndElement();
 
     mXmlWriter.writeStartElement("Скріплення");
-        mXmlWriter.writeTextElement("Сковаба", "3.0");
+        mXmlWriter.writeTextElement("Скоба", "3.0");
         mXmlWriter.writeTextElement("Термобіндер", "3.0");
         mXmlWriter.writeTextElement("Твердий_Переплет", "3.0");
         mXmlWriter.writeTextElement("Пружинка", "3.0");
